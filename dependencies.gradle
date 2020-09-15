@@ -23,6 +23,7 @@ ext {
             activity : "androidx.activity:activity-ktx:${appCompatVersion}",
             fragment : "androidx.fragment:fragment-ktx:${appCompatVersion}",
             coroutines : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}",
+            dagger : "com.google.dagger:dagger:${daggerVersion}",
             daggerSupport : "com.google.dagger:dagger-android-support:${daggerVersion}"
     ]
 
