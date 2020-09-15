@@ -1,0 +1,59 @@
+ext {
+
+    def coreVersion = '1.3.1'
+    def appCompatVersion = '1.1.0'
+    def coroutinesVersion = '1.3.3'
+    def constraintVersion = '1.1.3'
+    def materialVersion = '1.1.0'
+    def lifecycleVersion = '2.2.0'
+    def daggerVersion = '2.27'
+    def retrofitVersion = '2.9.0'
+    def loggingInterceptorVersion = '4.8.0'
+    def gsonVersion = '2.8.6'
+    def glideVersion = '4.11.0'
+
+    //Testing
+    def junitVersion = '5.6.0'
+    def mockitoVersion = '2.8.47'
+
+    core = [
+            kotlinStdLib : "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}",
+            core : "androidx.core:core-ktx:${coreVersion}",
+            appCompat : "androidx.appcompat:appcompat:${appCompatVersion}",
+            activity : "androidx.activity:activity-ktx:${appCompatVersion}",
+            fragment : "androidx.fragment:fragment-ktx:${appCompatVersion}",
+            coroutines : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}",
+            daggerSupport : "com.google.dagger:dagger-android-support:${daggerVersion}"
+    ]
+
+    designe = [
+            constraintLayout : "androidx.constraintlayout:constraintlayout:${constraintVersion}",
+            material         : "com.google.android.material:material:${materialVersion}"
+    ]
+
+    lifecycle = [
+            viewModel : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}",
+            extension : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
+            common : "androidx.lifecycle:lifecycle-common:${lifecycleVersion}",
+            livedata : "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleVersion}"
+    ]
+
+    networking = [
+            retrofit : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            converterGson : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            loggingInterceptor : "com.squareup.okhttp3:logging-interceptor:${loggingInterceptorVersion}",
+            gson : "com.google.code.gson:gson:${gsonVersion}",
+            glide : "com.github.bumptech.glide:glide:${glideVersion}"
+    ]
+
+    testing = [
+            junit : "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
+            mockito : "org.mockito:mockito-inline:${mockitoVersion}"
+    ]
+
+    kapt = [
+            daggerProccessor : "com.google.dagger:dagger-android-processor:${daggerVersion}",
+            daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            glideCompiler : "com.github.bumptech.glide:compiler:${glideVersion}"
+    ]
+}
