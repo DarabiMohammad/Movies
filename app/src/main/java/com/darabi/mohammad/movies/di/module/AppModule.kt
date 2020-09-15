@@ -3,6 +3,7 @@ package com.darabi.mohammad.movies.di.module
 import android.app.Application
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import com.darabi.mohammad.movies.App
 import dagger.Binds
 import dagger.Module
@@ -20,6 +21,6 @@ abstract class AppModule {
         fun provideBundle() = Bundle()
 
         @Provides
-        fun provideHandler() = Handler()
+        fun provideHandler() = Handler(Looper.getMainLooper())
     }
 }
