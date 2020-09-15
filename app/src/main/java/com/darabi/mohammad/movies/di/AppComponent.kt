@@ -1,9 +1,7 @@
 package com.darabi.mohammad.movies.di
 
 import com.darabi.mohammad.movies.App
-import com.darabi.mohammad.movies.di.module.ActivityBuilderModule
-import com.darabi.mohammad.movies.di.module.AppModule
-import com.darabi.mohammad.movies.di.module.ViewModelBuilderModule
+import com.darabi.mohammad.movies.di.module.*
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
@@ -13,7 +11,9 @@ import dagger.android.support.AndroidSupportInjectionModule
         AndroidSupportInjectionModule::class,
         AppModule::class,
         ActivityBuilderModule::class,
-        ViewModelBuilderModule::class
+        ViewModelBuilderModule::class,
+        RemoteModule::class,
+        RepositoryBuilderModule::class
     ]
 )
 interface AppComponent : AndroidInjector<App> {

@@ -30,7 +30,8 @@ class MainActivity @Inject constructor() : DaggerAppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         handler.postDelayed(Runnable {
-            navigateTo(fragment = homeFragment, isReplace = true)
+            if(!supportFragmentManager.isDestroyed)
+                navigateTo(fragment = homeFragment, isReplace = true)
         }, 2000)
     }
 }
