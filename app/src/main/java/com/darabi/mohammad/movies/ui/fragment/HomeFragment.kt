@@ -3,7 +3,6 @@ package com.darabi.mohammad.movies.ui.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import com.bumptech.glide.Glide
 import com.darabi.mohammad.movies.R
 import com.darabi.mohammad.movies.repository.Status
 import com.darabi.mohammad.movies.util.adapter.MoviesRecyclerAdapter
