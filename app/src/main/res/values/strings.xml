@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Movies</string>
+    <string name="content_description">contentDescription</string>
 
     <string name="simple_error_mesg">Place Holder Error Message</string>
+    <string name="lang">en_US</string>
 </resources>

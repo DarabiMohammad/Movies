@@ -37,7 +37,7 @@ class RepositoryImpl @Inject constructor(private val api: MoviesApi) : Repositor
                 val jsonObject = JSONObject(responseBody!!.string())
                 when {
                     jsonObject.has(messageKey) -> jsonObject.getString(messageKey)
-                    else -> "Somthing Wrong Happened"
+                    else -> "Something Wrong Happened"
                 }
             } catch (error: Exception) { "Something Wrong Happened" }
 
