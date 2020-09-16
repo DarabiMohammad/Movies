@@ -1,5 +1,6 @@
 package com.darabi.mohammad.movies.util
 
+import android.app.Activity
 import android.content.Context
 import android.widget.Toast
 import androidx.annotation.IdRes
@@ -8,7 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.darabi.mohammad.movies.R
 
-fun Context.makeToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+fun Activity.makeToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
 private fun beginTransaction(
     fragmentManager: FragmentManager, containerId: Int, fragment: Fragment, addToBackstack: Boolean, isReplace: Boolean
