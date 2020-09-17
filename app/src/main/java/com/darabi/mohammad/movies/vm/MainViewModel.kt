@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.darabi.mohammad.movies.App
 import com.darabi.mohammad.movies.BuildConfig
 import com.darabi.mohammad.movies.R
-import com.darabi.mohammad.movies.remote.api.model.config.Configuration
 import com.darabi.mohammad.movies.remote.api.model.discover.Movie
 import com.darabi.mohammad.movies.repository.Repository
 import com.darabi.mohammad.movies.repository.Response
@@ -33,7 +32,7 @@ class MainViewModel @Inject constructor(
     private fun getImageSizesList() = prefsManager.getPosterSizes()?.distinct()
 
     //hard coding
-    private fun getImageSize() = getImageSizesList()?.get(5)
+    private fun getImageSize() = getImageSizesList()?.get(6)
 
     fun checkConfigsStatus() {
         if(prefsManager.getBaseImageUrl().isEmpty())

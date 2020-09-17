@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.darabi.mohammad.movies.R
-import com.darabi.mohammad.movies.ui.fragment.HomeFragment
+import com.darabi.mohammad.movies.ui.fragment.home.HomeFragment
 import com.darabi.mohammad.movies.util.factory.InjectingFragmentFactory
 import com.darabi.mohammad.movies.util.factory.ViewModelFactory
 import com.darabi.mohammad.movies.util.navigateTo
@@ -15,7 +14,6 @@ import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import java.util.*
 import javax.inject.Inject
 
 class MainActivity @Inject constructor() : AppCompatActivity(), HasAndroidInjector {
@@ -52,5 +50,12 @@ class MainActivity @Inject constructor() : AppCompatActivity(), HasAndroidInject
             if(!supportFragmentManager.isDestroyed)
                 navigateTo(fragment = homeFragment, isReplace = true)
         }, 2000)
+    }
+
+    override fun onBackPressed() {
+        if(homeFragment.childFragmentManager.backStackEntryCount > 0)
+            homeFragment.childFragmentManager.popBackStack()
+        else
+            super.onBackPressed()
     }
 }

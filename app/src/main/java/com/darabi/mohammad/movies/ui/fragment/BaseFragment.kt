@@ -1,6 +1,5 @@
 package com.darabi.mohammad.movies.ui.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,7 @@ import kotlin.properties.Delegates
 
 abstract class BaseFragment : Fragment() {
 
-    protected val viewModel: MainViewModel by viewModels({ requireActivity() })
+    protected val  viewModel: MainViewModel by viewModels({ requireActivity() })
     protected open val layoutRes by Delegates.notNull<Int>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =

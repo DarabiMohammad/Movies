@@ -13,7 +13,8 @@ import com.darabi.mohammad.movies.remote.api.model.discover.Movie
 class MoviesVH constructor(
     itemView: View,
     private val baseUrl: String,
-    private val requestManager: RequestManager
+    private val requestManager: RequestManager,
+    private val callback: MoviesRecyclerCallback
 ): RecyclerView.ViewHolder(itemView) {
 
     private val poster = itemView.findViewById<ImageView>(R.id.img_poster)
@@ -28,5 +29,6 @@ class MoviesVH constructor(
         title.text = movie.title
         releaseYear.text = movie.releaseDate
         averageVote.text = movie.voteAverage.toString()
+        itemView.rootView.setOnClickListener { callback.onMovieClicked(movie.id) }
     }
 }

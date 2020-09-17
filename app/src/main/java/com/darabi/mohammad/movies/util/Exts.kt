@@ -28,9 +28,16 @@ private fun beginTransaction(
 }.commit()
 
 fun FragmentActivity.navigateTo(
-    @IdRes containerId: Int = R.id.container_main, fragment: Fragment, addToBackstack: Boolean = false, isReplace: Boolean = false
-) = beginTransaction(supportFragmentManager, containerId, fragment, addToBackstack, isReplace)
+    @IdRes containerId: Int = R.id.container_main,
+    fragment: Fragment,
+    addToBackstack: Boolean = false,
+    isReplace: Boolean = false
+){
+    beginTransaction(supportFragmentManager, containerId, fragment, addToBackstack, isReplace)
+}
 
 fun Fragment.navigateTo(
     @IdRes containerId: Int, fragment: Fragment, addToBackstack: Boolean = false, isReplace: Boolean = false
-) = beginTransaction(childFragmentManager, containerId, fragment, addToBackstack, isReplace)
+){
+    beginTransaction(childFragmentManager, containerId, fragment, addToBackstack, isReplace)
+}

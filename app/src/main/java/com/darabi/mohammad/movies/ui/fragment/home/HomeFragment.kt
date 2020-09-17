@@ -1,23 +1,30 @@
-package com.darabi.mohammad.movies.ui.fragment
+package com.darabi.mohammad.movies.ui.fragment.home
 
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.darabi.mohammad.movies.R
 import com.darabi.mohammad.movies.repository.Status
+import com.darabi.mohammad.movies.ui.fragment.BaseFragment
+import com.darabi.mohammad.movies.ui.fragment.detail.DetailFragment
 import com.darabi.mohammad.movies.util.adapter.MoviesRecyclerAdapter
+import com.darabi.mohammad.movies.util.adapter.MoviesRecyclerCallback
 import com.darabi.mohammad.movies.util.makeToast
+import com.darabi.mohammad.movies.util.navigateTo
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 
 class HomeFragment @Inject constructor(
-    private val adapter: MoviesRecyclerAdapter
-) : BaseFragment(), View.OnClickListener {
+    private val adapter: MoviesRecyclerAdapter,
+    private val detailFragment: DetailFragment
+) : BaseFragment(), MoviesRecyclerCallback {
 
-    override val layoutRes = R.layout.fragment_home
+    override val layoutRes get() = R.layout.fragment_home
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        adapter.callback = this
 
         viewModel.fetchMovies()
 
@@ -37,9 +44,6 @@ class HomeFragment @Inject constructor(
         rcv_movies.adapter = adapter
     }
 
-    override fun onClick(view: View?) {
-        when(view?.id) {
-//            R.id.btn -> viewModel.fetchMovies()
-        }
-    }
+    override fun onMovieClicked(id: Int) =
+        navigateTo(containerId = R.id.container_home, fragment = detailFragment, addToBackstack = true)
 }

@@ -6,6 +6,8 @@ import android.os.Handler
 import android.os.Looper
 import com.bumptech.glide.Glide
 import com.darabi.mohammad.movies.App
+import com.darabi.mohammad.movies.ui.fragment.home.HomeFragment
+import com.darabi.mohammad.movies.util.adapter.MoviesRecyclerCallback
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
