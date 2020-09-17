@@ -1,6 +1,7 @@
 package com.darabi.mohammad.movies.repository
 
 import com.darabi.mohammad.movies.remote.api.MoviesApi
+import com.darabi.mohammad.movies.remote.api.model.config.Configuration
 import com.darabi.mohammad.movies.remote.api.model.discover.BaseResponse
 import com.darabi.mohammad.movies.repository.Response.Companion.success
 import com.darabi.mohammad.movies.repository.Response.Companion.error
@@ -40,6 +41,8 @@ class RepositoryImpl @Inject constructor(private val api: MoviesApi) : Repositor
                     else -> "Something Wrong Happened"
                 }
             } catch (error: Exception) { "Something Wrong Happened" }
+
+    override suspend fun fetchImageConfigs(apiKey: String) = safeApiCall { api.fetchConfigs(apiKey) }
 
     override suspend fun fetchMovies(
         apiKey: String, language: String, sortBy: String, releaseYear: String, page: Int

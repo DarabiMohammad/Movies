@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.bumptech.glide.Glide
 import com.darabi.mohammad.movies.App
 import dagger.Binds
 import dagger.Module

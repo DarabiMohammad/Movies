@@ -1,10 +1,14 @@
 package com.darabi.mohammad.movies.remote.api
 
+import com.darabi.mohammad.movies.remote.api.model.config.Configuration
 import com.darabi.mohammad.movies.remote.api.model.discover.MoviesList
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface MoviesApi {
+
+    @GET("configuration")
+    suspend fun fetchConfigs(@Query("api_key") apiKey: String): Configuration
 
     @GET("discover/movie")
     suspend fun fetchMovies(

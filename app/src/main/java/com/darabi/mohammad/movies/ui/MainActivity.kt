@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.darabi.mohammad.movies.R
 import com.darabi.mohammad.movies.ui.fragment.HomeFragment
 import com.darabi.mohammad.movies.util.factory.InjectingFragmentFactory
