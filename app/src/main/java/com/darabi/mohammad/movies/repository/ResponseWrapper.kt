@@ -1,7 +1,5 @@
 package com.darabi.mohammad.movies.repository
 
-import com.darabi.mohammad.movies.remote.api.model.discover.Movie
-
 enum class Status { SUCCESS, ERROR, LOADING }
 
 data class Response <out T> (

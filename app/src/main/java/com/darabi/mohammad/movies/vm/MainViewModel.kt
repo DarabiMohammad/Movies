@@ -7,7 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.darabi.mohammad.movies.App
 import com.darabi.mohammad.movies.BuildConfig
 import com.darabi.mohammad.movies.R
-import com.darabi.mohammad.movies.remote.api.model.discover.Movie
+import com.darabi.mohammad.movies.remote.api.model.Movie
+import com.darabi.mohammad.movies.remote.api.model.MovieDetail
 import com.darabi.mohammad.movies.repository.Repository
 import com.darabi.mohammad.movies.repository.Response
 import com.darabi.mohammad.movies.repository.Response.Companion.loading
@@ -21,6 +22,8 @@ class MainViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
     private val apiKey = BuildConfig.API_KEY
+
+    var movieId = -1
 
     private fun saveConfigs() = viewModelScope.launch {
 
@@ -48,5 +51,11 @@ class MainViewModel @Inject constructor(
             apiKey, getApplication<App>().getString(R.string.lang),
             "popularity.desc", "2010", 1
         )
+    }
+
+    val movieDetailResponse = MutableLiveData<Response<MovieDetail>>()
+    fun fetchMovieDetail() = viewModelScope.launch {
+        movieDetailResponse.value = loading()
+        movieDetailResponse.value = repository.fetchMovieDetail(apiKey, movieId)
     }
 }

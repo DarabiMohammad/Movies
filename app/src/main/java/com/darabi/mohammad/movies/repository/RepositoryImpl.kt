@@ -1,8 +1,8 @@
 package com.darabi.mohammad.movies.repository
 
 import com.darabi.mohammad.movies.remote.api.MoviesApi
-import com.darabi.mohammad.movies.remote.api.model.config.Configuration
-import com.darabi.mohammad.movies.remote.api.model.discover.BaseResponse
+import com.darabi.mohammad.movies.remote.api.model.BaseResponse
+import com.darabi.mohammad.movies.remote.api.model.MovieDetail
 import com.darabi.mohammad.movies.repository.Response.Companion.success
 import com.darabi.mohammad.movies.repository.Response.Companion.error
 import kotlinx.coroutines.Dispatchers
@@ -42,9 +42,13 @@ class RepositoryImpl @Inject constructor(private val api: MoviesApi) : Repositor
                 }
             } catch (error: Exception) { "Something Wrong Happened" }
 
-    override suspend fun fetchImageConfigs(apiKey: String) = safeApiCall { api.fetchConfigs(apiKey) }
+    override suspend fun fetchImageConfigs(apiKey: String) =
+        safeApiCall { api.fetchConfigs(apiKey) }
 
     override suspend fun fetchMovies(
         apiKey: String, language: String, sortBy: String, releaseYear: String, page: Int
     ) = safeApiCall { api.fetchMovies(apiKey,language, sortBy, releaseYear, page) }
+
+    override suspend fun fetchMovieDetail(apiKey: String, movieId: Int): Response<MovieDetail> =
+        safeApiCall { api.fetchMovieDetail(movieId, apiKey) }
 }

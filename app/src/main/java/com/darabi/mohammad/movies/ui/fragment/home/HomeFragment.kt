@@ -44,6 +44,8 @@ class HomeFragment @Inject constructor(
         rcv_movies.adapter = adapter
     }
 
-    override fun onMovieClicked(id: Int) =
+    override fun onMovieClicked(id: Int) {
+        viewModel.movieId = id
         navigateTo(containerId = R.id.container_home, fragment = detailFragment, addToBackstack = true)
+    }
 }

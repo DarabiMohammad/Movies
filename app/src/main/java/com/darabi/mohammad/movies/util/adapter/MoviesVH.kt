@@ -4,11 +4,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import com.darabi.mohammad.movies.BuildConfig
 import com.darabi.mohammad.movies.R
-import com.darabi.mohammad.movies.remote.api.model.discover.Movie
+import com.darabi.mohammad.movies.remote.api.model.Movie
 
 class MoviesVH constructor(
     itemView: View,

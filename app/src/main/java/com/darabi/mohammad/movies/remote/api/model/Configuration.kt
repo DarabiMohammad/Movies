@@ -1,6 +1,5 @@
-package com.darabi.mohammad.movies.remote.api.model.config
+package com.darabi.mohammad.movies.remote.api.model
 
-import com.darabi.mohammad.movies.remote.api.model.discover.BaseResponse
 import com.google.gson.annotations.SerializedName
 
 data class Configuration (
