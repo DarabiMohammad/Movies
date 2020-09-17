@@ -17,16 +17,30 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     application: Application,
+    private val prefsManager: PrefsManager,
     private val repository: Repository
 ) : AndroidViewModel(application) {
 
-    val apiKey = BuildConfig.API_KEY
+    private val apiKey = BuildConfig.API_KEY
 
-    val configsResponse = MutableLiveData<Response<Configuration>>()
-    fun fetchConfigs() = viewModelScope.launch {
-        configsResponse.value = loading()
-        configsResponse.value = repository.fetchImageConfigs(apiKey)
+    private fun saveConfigs() = viewModelScope.launch {
+
+        val result = repository.fetchImageConfigs(apiKey)
+        result.data?.config?.baseUrl?.let { prefsManager.saveBaseImageUrl(it) }
+        result.data?.config?.posterSizes?.toSet()?.let { prefsManager.savePosterSizes(it) }
     }
+
+    private fun getImageSizesList() = prefsManager.getPosterSizes()?.distinct()
+
+    //hard coding
+    private fun getImageSize() = getImageSizesList()?.get(5)
+
+    fun checkConfigsStatus() {
+        if(prefsManager.getBaseImageUrl().isEmpty())
+            saveConfigs()
+    }
+
+    fun getImagesUrl() = "${prefsManager.getBaseImageUrl()}/${getImageSize()}/"
 
     val moviesResponse = MutableLiveData<Response<List<Movie>>>()
     fun fetchMovies() = viewModelScope.launch {

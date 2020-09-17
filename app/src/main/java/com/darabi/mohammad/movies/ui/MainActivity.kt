@@ -46,6 +46,8 @@ class MainActivity @Inject constructor() : AppCompatActivity(), HasAndroidInject
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
+        viewModel.checkConfigsStatus()
+
         handler.postDelayed(Runnable {
             if(!supportFragmentManager.isDestroyed)
                 navigateTo(fragment = homeFragment, isReplace = true)

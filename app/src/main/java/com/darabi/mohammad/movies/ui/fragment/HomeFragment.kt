@@ -25,7 +25,7 @@ class HomeFragment @Inject constructor(
             when(it.status) {
                 Status.LOADING -> {} // actions like changing views visibility
                 Status.SUCCESS -> { it.data?.let { list ->
-                    adapter.setList(list)
+                    adapter.setList(list, viewModel.getImagesUrl())
                     initViews()
                 } }
                 Status.ERROR -> activity?.makeToast(it.message ?: getString(R.string.simple_error_mesg))
