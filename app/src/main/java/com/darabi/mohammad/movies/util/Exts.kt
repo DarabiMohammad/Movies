@@ -41,3 +41,5 @@ fun Fragment.navigateTo(
 ){
     beginTransaction(childFragmentManager, containerId, fragment, addToBackstack, isReplace)
 }
+
+fun String.extractIntegers() = this.replace("[^0-9]".toRegex(), "")

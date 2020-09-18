@@ -2,40 +2,29 @@ package com.darabi.mohammad.movies.util.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.darabi.mohammad.movies.R
 import com.darabi.mohammad.movies.remote.api.model.Movie
 import javax.inject.Inject
 
 class MoviesRecyclerAdapter @Inject constructor(
-    private val requestManager: RequestManager
-) : RecyclerView.Adapter<MoviesVH>() {
-
-    private lateinit var moviesList: List<Movie>
-    private lateinit var imagesUrl: String
-    lateinit var callback: MoviesRecyclerCallback
-
-    fun setList(moviesList: List<Movie>, imagesUrl: String) {
-        this.moviesList = moviesList
-        this.imagesUrl = imagesUrl
-    }
+    configs: AdapterConfigs,
+    private val requestManager: RequestManager,
+    private val adapterCallback: EndlessAdapterCallback,
+    private val imageUrl: String
+) : EndlessAdapter<MoviesVH, Movie>(configs, adapterCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesVH =
-        MoviesVH(
-            LayoutInflater.from(parent.context).inflate(R.layout.rcv_itme_movie, parent, false),
-            imagesUrl,
-            requestManager,
-            callback
-        )
+        if(viewType == otherViewType)
+            MoviesVH(
+                LayoutInflater.from(parent.context).inflate(R.layout.rcv_itme_movie, parent, false),
+                imageUrl, requestManager, adapterCallback
+            )
+        else MoviesVH(LayoutInflater.from(parent.context).inflate(R.layout.rcv_item_movie_loading, parent, false))
 
-    override fun onBindViewHolder(viewHolder: MoviesVH, position: Int) =
-        viewHolder.bindView(moviesList[position])
-
-    override fun getItemCount(): Int = moviesList.size
-}
-
-interface MoviesRecyclerCallback {
-
-    fun onMovieClicked(id: Int)
+    override fun onBindViewHolder(holder: MoviesVH, position: Int) {
+        super.onBindViewHolder(holder, position)
+        if(objects.size > 0)
+            holder.bindView(objects[position])
+    }
 }

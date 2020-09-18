@@ -45,11 +45,11 @@ class MainViewModel @Inject constructor(
     fun getImagesUrl() = "${prefsManager.getBaseImageUrl()}/${getImageSize()}/"
 
     val moviesResponse = MutableLiveData<Response<List<Movie>>>()
-    fun fetchMovies() = viewModelScope.launch {
+    fun fetchMovies(page: Int) = viewModelScope.launch {
         moviesResponse.value = loading()
         moviesResponse.value = repository.fetchMovies(
             apiKey, getApplication<App>().getString(R.string.lang),
-            "popularity.desc", "2010", 1
+            "popularity.desc", "2010", page
         )
     }
 

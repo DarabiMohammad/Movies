@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.darabi.mohammad.movies.App
 import com.darabi.mohammad.movies.ui.fragment.home.HomeFragment
-import com.darabi.mohammad.movies.util.adapter.MoviesRecyclerCallback
+import com.darabi.mohammad.movies.util.adapter.AdapterConfigs
+import com.darabi.mohammad.movies.util.adapter.EndlessAdapterCallback
+import com.darabi.mohammad.movies.util.adapter.MoviesRecyclerAdapter
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -25,5 +28,11 @@ abstract class AppModule {
 
         @Provides
         fun provideHandler() = Handler(Looper.getMainLooper())
+
+        @Provides
+        fun provideGlide(application: Application) = Glide.with(application)
+
+        @Provides
+        fun provideAdapterConfigs() = AdapterConfigs(itemCountPerPage = 10)
     }
 }

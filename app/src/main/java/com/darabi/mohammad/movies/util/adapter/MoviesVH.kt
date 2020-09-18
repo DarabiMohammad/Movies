@@ -8,25 +8,39 @@ import com.bumptech.glide.RequestManager
 import com.darabi.mohammad.movies.R
 import com.darabi.mohammad.movies.remote.api.model.Movie
 
-class MoviesVH constructor(
-    itemView: View,
-    private val baseUrl: String,
-    private val requestManager: RequestManager,
-    private val callback: MoviesRecyclerCallback
-): RecyclerView.ViewHolder(itemView) {
+class MoviesVH : RecyclerView.ViewHolder {
 
+    //Properties
+    private lateinit var baseUrl: String
+    private lateinit var  requestManager: RequestManager
+    private lateinit var  callback: EndlessAdapterCallback
+
+    //Views
     private val poster = itemView.findViewById<ImageView>(R.id.img_poster)
     private val title = itemView.findViewById<TextView>(R.id.txt_title)
     private val releaseYear = itemView.findViewById<TextView>(R.id.txt_released_year)
     private val averageVote = itemView.findViewById<TextView>(R.id.txt_vote_average)
 
+    constructor(
+        itemView: View,
+        baseUrl: String,
+        requestManager: RequestManager,
+        callback: EndlessAdapterCallback
+    ) : super(itemView) {
+        this.baseUrl = baseUrl
+        this.requestManager = requestManager
+        this.callback = callback
+    }
+
+    constructor(itemView: View) : super(itemView)
+
     fun bindView(movie: Movie) {
 
-        requestManager.asDrawable().placeholder(R.color.colorPrimary).error(R.color.colorAccent)
+        requestManager.asDrawable().placeholder(android.R.color.white).error(R.drawable.ic_outline_error_24)
             .load(baseUrl + movie.posterPath).into(poster)
         title.text = movie.title
         releaseYear.text = movie.releaseDate
         averageVote.text = movie.voteAverage.toString()
-        itemView.rootView.setOnClickListener { callback.onMovieClicked(movie.id) }
+        itemView.rootView.setOnClickListener { callback.onItemClick(movie.id) }
     }
 }

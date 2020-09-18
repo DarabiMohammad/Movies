@@ -12,6 +12,7 @@ import com.darabi.mohammad.movies.remote.api.model.MovieDetail
 import com.darabi.mohammad.movies.remote.api.model.Name
 import com.darabi.mohammad.movies.repository.Status
 import com.darabi.mohammad.movies.ui.fragment.BaseFragment
+import com.darabi.mohammad.movies.util.extractIntegers
 import com.darabi.mohammad.movies.util.makeToast
 import kotlinx.android.synthetic.main.fragment_detail.*
 import javax.inject.Inject
@@ -45,7 +46,7 @@ class DetailFragment @Inject constructor(
     private fun onSuccess(movieDetail: MovieDetail) {
 
         glide.asDrawable().load(viewModel.getImagesUrl() + movieDetail.backdropPath)
-            .placeholder(R.color.colorPrimary).error(R.color.colorAccent).into(img_poster)
+            .placeholder(android.R.color.white).error(R.drawable.ic_outline_error_24).into(img_poster)
 
         txt_title.text = movieDetail.title
         txt_overview.text = movieDetail.overview
@@ -76,10 +77,8 @@ class DetailFragment @Inject constructor(
         } else textView.visibility = View.GONE
     }
 
-    private fun extractIntFromString(time: String) = time.replace("[^0-9]".toRegex(), "")
-
     private fun formatTime(time: String): String {
-        val timeInMin = extractIntFromString(time).toInt()
+        val timeInMin = time.extractIntegers().toInt()
         val hour = timeInMin / 60
         val minute = timeInMin % 60
         return "${hour}h ${minute}min"
