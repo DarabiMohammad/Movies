@@ -1,8 +1,6 @@
 package com.darabi.mohammad.movies.util.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 abstract class EndlessAdapter<VH: RecyclerView.ViewHolder, O> constructor(
     private val adapterConfigs: AdapterConfigs,
@@ -23,6 +21,12 @@ abstract class EndlessAdapter<VH: RecyclerView.ViewHolder, O> constructor(
     fun setList(newObjects: List<O>) {
         objects.addAll(newObjects)
         notifyItemRangeChanged(page * adapterConfigs.itemCountPerPage, newObjects.size)
+    }
+
+    fun clear() {
+        objects.clear()
+        page = adapterConfigs.firstPage
+        notifyItemRangeRemoved(0, objects.size)
     }
 
     override fun getItemViewType(position: Int): Int =

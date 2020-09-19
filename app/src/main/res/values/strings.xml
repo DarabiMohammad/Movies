@@ -2,7 +2,7 @@
     <string name="app_name">Movies</string>
     <string name="content_description">contentDescription</string>
 
-    <string name="simple_error_mesg">Place Holder Error Message</string>
+    <string name="simple_error_mesg">Oops!\nSomthing Wrong Happened.</string>
     <string name="lang">en_US</string>
 
     <string name="released">Released</string>
@@ -11,4 +11,7 @@
     <string name="genres">Genres</string>
     <string name="languege">Langueges</string>
     <string name="budget">Budget</string>
+
+    <string name="release_year">"Release Year : "</string>
+
 </resources>

@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(private val api: MoviesApi) : Repository {
 
-    private val messageKey = "message"
+    private val messageKey = "status_message"
 
     private suspend inline fun <T> safeApiCall(crossinline apiService: suspend () -> BaseResponse<T>): Response<T> =
             try {
@@ -46,8 +46,8 @@ class RepositoryImpl @Inject constructor(private val api: MoviesApi) : Repositor
         safeApiCall { api.fetchConfigs(apiKey) }
 
     override suspend fun fetchMovies(
-        apiKey: String, language: String, sortBy: String, releaseYear: String, page: Int
-    ) = safeApiCall { api.fetchMovies(apiKey,language, sortBy, releaseYear, page) }
+        apiKey: String, language: String, releaseYear: String, page: Int
+    ) = safeApiCall { api.fetchMovies(apiKey,language, releaseYear, page) }
 
     override suspend fun fetchMovieDetail(apiKey: String, movieId: Int): Response<MovieDetail> =
         safeApiCall { api.fetchMovieDetail(movieId, apiKey) }

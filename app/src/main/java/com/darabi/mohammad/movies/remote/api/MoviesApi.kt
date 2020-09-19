@@ -16,7 +16,6 @@ interface MoviesApi {
     @GET("discover/movie")
     suspend fun fetchMovies(
         @Query("api_key") apiKey: String,
-        @Query("language") language: String,
         @Query("sort_by") sortBy: String,
         @Query("primary_release_year") releaseYear: String,
         @Query("page") page: Int

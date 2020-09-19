@@ -2,9 +2,12 @@ package com.darabi.mohammad.movies.ui.fragment.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.bumptech.glide.RequestManager
 import com.darabi.mohammad.movies.R
 import com.darabi.mohammad.movies.remote.api.model.Movie
+import com.darabi.mohammad.movies.repository.Response
 import com.darabi.mohammad.movies.repository.Status
 import com.darabi.mohammad.movies.ui.fragment.BaseFragment
 import com.darabi.mohammad.movies.ui.fragment.detail.DetailFragment
@@ -19,31 +22,37 @@ import javax.inject.Inject
 class HomeFragment @Inject constructor(
     private val detailFragment: DetailFragment,
     private val adapterConfigs: AdapterConfigs,
-    private val glide: RequestManager
-) : BaseFragment(), EndlessAdapterCallback {
+    private val spinnerListener: SpinnerListener
+) : BaseFragment(), EndlessAdapterCallback, SpinnerListener.Callback {
 
     override val layoutRes get() = R.layout.fragment_home
 
     private val adapter by lazy {
-        MoviesRecyclerAdapter(adapterConfigs, glide, this, viewModel.getImagesUrl())
+        MoviesRecyclerAdapter(adapterConfigs, this, viewModel.getImagesUrl())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(rcv_movies.adapter == null)
-            rcv_movies.adapter = adapter
+        rcv_movies.adapter = adapter
+
+        //TODO fix losing recycler state in orientation changes
 
         viewModel.moviesResponse.observe(viewLifecycleOwner, {
             when(it.status) {
-                Status.LOADING -> onLoading()
+                Status.LOADING -> onLoading(it.message!!)
                 Status.SUCCESS -> onSuccess(it.data!!)
                 Status.ERROR -> onError(it.message)
             }
         })
     }
 
-    private fun onLoading() {}
+    private fun onLoading(message: String) {
+        if(message == Response.DO_REFRESH) {
+            prg_loading.visibility = View.VISIBLE
+            adapter.clear()
+        } else return
+    }
 
     private fun onSuccess(movies: List<Movie>) {
         adapter.setList(movies)
@@ -52,16 +61,30 @@ class HomeFragment @Inject constructor(
 
     private fun onError(errorMessage: String?) {
         prg_loading.visibility = View.GONE
+        rcv_movies.visibility = View.GONE
         activity?.makeToast(errorMessage ?: getString(R.string.simple_error_mesg))
     }
 
     private fun initViews() {
+        if(spn_release_year.adapter == null) {
+            val list = viewModel.getReleaseYears()!!
+            spn_release_year.adapter = activity?.let {
+                ArrayAdapter(it, R.layout.spn_item_release_year, list)
+            }
+            spn_release_year.setSelection(list.size -1, false)
+            spinnerListener.callback = this
+            spn_release_year.onItemSelectedListener = spinnerListener
+            txt_release_year.visibility = View.VISIBLE
+        }
         prg_loading.visibility = View.GONE
-        layout_movies_host.visibility = View.VISIBLE
     }
 
     override fun loadNextChunck(page: Int) {
         viewModel.fetchMovies(page)
+    }
+
+    override fun onYearClick(year: String) {
+        viewModel.fetchMovies(releasYear = year)
     }
 
     override fun onItemClick(position: Int) {

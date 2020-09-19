@@ -33,7 +33,7 @@ class DetailFragment @Inject constructor(
             when(it.status) {
                 Status.LOADING -> onLoading()
                 Status.SUCCESS -> onSuccess(it.data!!)
-                Status.ERROR -> activity?.makeToast(it.message ?: getString(R.string.simple_error_mesg))
+                Status.ERROR -> onError(it.message)
             }
         })
     }
@@ -82,5 +82,11 @@ class DetailFragment @Inject constructor(
         val hour = timeInMin / 60
         val minute = timeInMin % 60
         return "${hour}h ${minute}min"
+    }
+
+    private fun onError(message: String?) {
+        prg_loading.visibility = View.GONE
+        txt_error.visibility = View.VISIBLE
+        txt_error.text = message ?: getString(R.string.simple_error_mesg)
     }
 }

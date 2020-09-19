@@ -13,20 +13,22 @@ fun Activity.makeToast(message: String) = Toast.makeText(this, message, Toast.LE
 
 private fun beginTransaction(
     fragmentManager: FragmentManager, containerId: Int, fragment: Fragment, addToBackstack: Boolean, isReplace: Boolean
-): Int = fragmentManager.beginTransaction().also {
-    if(isReplace) {
-        if(addToBackstack)
-            it.addToBackStack(fragment.tag).replace(containerId, fragment, fragment.tag)
-        else
-            it.replace(containerId, fragment, fragment.tag)
-    } else {
-        if(addToBackstack)
-            it.addToBackStack(fragment.tag).add(containerId, fragment, fragment.tag)
-        else
-            it.add(containerId, fragment, fragment.tag)
-    }
-}.commit()
-
+){
+    if(fragment.isAdded) return
+    else fragmentManager.beginTransaction().also {
+        if(isReplace) {
+            if(addToBackstack)
+                it.addToBackStack(fragment.tag).replace(containerId, fragment, fragment.tag)
+            else
+                it.replace(containerId, fragment, fragment.tag)
+        } else {
+            if(addToBackstack)
+                it.addToBackStack(fragment.tag).add(containerId, fragment, fragment.tag)
+            else
+                it.add(containerId, fragment, fragment.tag)
+        }
+    }.commit()
+}
 fun FragmentActivity.navigateTo(
     @IdRes containerId: Int = R.id.container_main,
     fragment: Fragment,
@@ -42,4 +44,7 @@ fun Fragment.navigateTo(
     beginTransaction(childFragmentManager, containerId, fragment, addToBackstack, isReplace)
 }
 
-fun String.extractIntegers() = this.replace("[^0-9]".toRegex(), "")
+fun String.extractIntegers() =
+    if(this.isNotEmpty())
+        this.replace("[^0-9]".toRegex(), "")
+    else this

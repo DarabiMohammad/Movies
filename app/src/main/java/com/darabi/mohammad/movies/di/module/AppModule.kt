@@ -33,6 +33,6 @@ abstract class AppModule {
         fun provideGlide(application: Application) = Glide.with(application)
 
         @Provides
-        fun provideAdapterConfigs() = AdapterConfigs(itemCountPerPage = 10)
+        fun provideAdapterConfigs() = AdapterConfigs(isEnabledLoading = false, itemCountPerPage = 10)
     }
 }

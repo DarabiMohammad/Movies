@@ -9,7 +9,6 @@ import javax.inject.Inject
 
 class MoviesRecyclerAdapter @Inject constructor(
     configs: AdapterConfigs,
-    private val requestManager: RequestManager,
     private val adapterCallback: EndlessAdapterCallback,
     private val imageUrl: String
 ) : EndlessAdapter<MoviesVH, Movie>(configs, adapterCallback) {
@@ -18,7 +17,7 @@ class MoviesRecyclerAdapter @Inject constructor(
         if(viewType == otherViewType)
             MoviesVH(
                 LayoutInflater.from(parent.context).inflate(R.layout.rcv_itme_movie, parent, false),
-                imageUrl, requestManager, adapterCallback
+                imageUrl, adapterCallback
             )
         else MoviesVH(LayoutInflater.from(parent.context).inflate(R.layout.rcv_item_movie_loading, parent, false))
 
