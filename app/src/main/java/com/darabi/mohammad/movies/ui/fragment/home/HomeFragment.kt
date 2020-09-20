@@ -2,9 +2,7 @@ package com.darabi.mohammad.movies.ui.fragment.home
 
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.bumptech.glide.RequestManager
 import com.darabi.mohammad.movies.R
 import com.darabi.mohammad.movies.remote.api.model.Movie
 import com.darabi.mohammad.movies.repository.Response
@@ -36,8 +34,6 @@ class HomeFragment @Inject constructor(
 
         rcv_movies.adapter = adapter
 
-        //TODO fix losing recycler state in orientation changes
-
         viewModel.moviesResponse.observe(viewLifecycleOwner, {
             when(it.status) {
                 Status.LOADING -> onLoading(it.message!!)
@@ -49,8 +45,8 @@ class HomeFragment @Inject constructor(
 
     private fun onLoading(message: String) {
         if(message == Response.DO_REFRESH) {
-            prg_loading.visibility = View.VISIBLE
             adapter.clear()
+            prg_loading.visibility = View.VISIBLE
         } else return
     }
 
@@ -71,7 +67,7 @@ class HomeFragment @Inject constructor(
             spn_release_year.adapter = activity?.let {
                 ArrayAdapter(it, R.layout.spn_item_release_year, list)
             }
-            spn_release_year.setSelection(list.size -1, false)
+            spn_release_year.setSelection(list.indexOf(viewModel.year), false)
             spinnerListener.callback = this
             spn_release_year.onItemSelectedListener = spinnerListener
             txt_release_year.visibility = View.VISIBLE

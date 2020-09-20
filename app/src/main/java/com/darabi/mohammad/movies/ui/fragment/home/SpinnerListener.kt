@@ -1,6 +1,5 @@
 package com.darabi.mohammad.movies.ui.fragment.home
 
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import javax.inject.Inject

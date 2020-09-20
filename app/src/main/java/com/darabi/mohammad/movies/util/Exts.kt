@@ -1,7 +1,6 @@
 package com.darabi.mohammad.movies.util
 
 import android.app.Activity
-import android.content.Context
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment

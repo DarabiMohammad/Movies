@@ -24,9 +24,9 @@ abstract class EndlessAdapter<VH: RecyclerView.ViewHolder, O> constructor(
     }
 
     fun clear() {
-        objects.clear()
         page = adapterConfigs.firstPage
-        notifyItemRangeRemoved(0, objects.size)
+        objects.clear()
+        notifyDataSetChanged()
     }
 
     override fun getItemViewType(position: Int): Int =

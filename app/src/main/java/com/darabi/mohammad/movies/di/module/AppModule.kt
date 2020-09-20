@@ -1,16 +1,15 @@
 package com.darabi.mohammad.movies.di.module
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestManager
 import com.darabi.mohammad.movies.App
-import com.darabi.mohammad.movies.ui.fragment.home.HomeFragment
 import com.darabi.mohammad.movies.util.adapter.AdapterConfigs
-import com.darabi.mohammad.movies.util.adapter.EndlessAdapterCallback
-import com.darabi.mohammad.movies.util.adapter.MoviesRecyclerAdapter
+import com.darabi.mohammad.movies.vm.PrefsManager
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

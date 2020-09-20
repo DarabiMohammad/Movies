@@ -8,7 +8,7 @@ interface Repository {
 
     suspend fun fetchImageConfigs(apiKey: String): Response<Configuration>
 
-    suspend fun fetchMovies(apiKey: String, language: String, releaseYear: String, page: Int): Response<List<Movie>>
+    suspend fun fetchMovies(apiKey: String, releaseYear: String, page: Int): Response<List<Movie>>
 
     suspend fun fetchMovieDetail(apiKey: String, movieId: Int): Response<MovieDetail>
 }

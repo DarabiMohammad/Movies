@@ -17,13 +17,13 @@ ext {
     def mockitoVersion = '2.8.47'
 
     core = [
-            kotlinStdLib : "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}",
-            core : "androidx.core:core-ktx:${coreVersion}",
-            appCompat : "androidx.appcompat:appcompat:${appCompatVersion}",
-            activity : "androidx.activity:activity-ktx:${appCompatVersion}",
-            fragment : "androidx.fragment:fragment-ktx:${appCompatVersion}",
-            coroutines : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}",
-            dagger : "com.google.dagger:dagger:${daggerVersion}",
+            kotlinStdLib  : "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}",
+            core          : "androidx.core:core-ktx:${coreVersion}",
+            appCompat     : "androidx.appcompat:appcompat:${appCompatVersion}",
+            activity      : "androidx.activity:activity-ktx:${appCompatVersion}",
+            fragment      : "androidx.fragment:fragment-ktx:${appCompatVersion}",
+            coroutines    : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}",
+            dagger        : "com.google.dagger:dagger:${daggerVersion}",
             daggerSupport : "com.google.dagger:dagger-android-support:${daggerVersion}"
     ]
 
@@ -35,26 +35,25 @@ ext {
     lifecycle = [
             viewModel : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}",
             extension : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
-            common : "androidx.lifecycle:lifecycle-common:${lifecycleVersion}",
-            livedata : "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleVersion}"
+            livedata  : "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleVersion}"
     ]
 
     networking = [
-            retrofit : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            converterGson : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofit           : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            converterGson      : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
             loggingInterceptor : "com.squareup.okhttp3:logging-interceptor:${loggingInterceptorVersion}",
-            gson : "com.google.code.gson:gson:${gsonVersion}",
-            glide : "com.github.bumptech.glide:glide:${glideVersion}"
+            gson               : "com.google.code.gson:gson:${gsonVersion}",
+            glide              : "com.github.bumptech.glide:glide:${glideVersion}"
     ]
 
     testing = [
-            junit : "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
+            junit   : "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
             mockito : "org.mockito:mockito-inline:${mockitoVersion}"
     ]
 
     kapt = [
             daggerProccessor : "com.google.dagger:dagger-android-processor:${daggerVersion}",
-            daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            glideCompiler : "com.github.bumptech.glide:compiler:${glideVersion}"
+            daggerCompiler   : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            glideCompiler    : "com.github.bumptech.glide:compiler:${glideVersion}"
     ]
 }

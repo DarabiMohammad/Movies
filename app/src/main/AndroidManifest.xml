@@ -16,7 +16,7 @@
         tools:ignore="AllowBackup">
         <activity
             android:name=".ui.MainActivity"
-            android:configChanges="orientation">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -2,8 +2,8 @@ package com.darabi.mohammad.movies.ui
 
 import android.os.Bundle
 import android.os.Handler
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.darabi.mohammad.movies.R
 import com.darabi.mohammad.movies.ui.fragment.home.HomeFragment
 import com.darabi.mohammad.movies.util.factory.InjectingFragmentFactory
@@ -20,7 +20,7 @@ class MainActivity @Inject constructor() : AppCompatActivity(), HasAndroidInject
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModels { viewModelFactory }
 
     @Inject
     lateinit var fragmentFactory: InjectingFragmentFactory
@@ -42,11 +42,9 @@ class MainActivity @Inject constructor() : AppCompatActivity(), HasAndroidInject
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
         viewModel.checkConfigsStatus()
 
-        handler.postDelayed(Runnable {
+        handler.postDelayed({
             if(!supportFragmentManager.isDestroyed)
                 navigateTo(fragment = homeFragment, isReplace = true)
         }, 2000)

@@ -3,7 +3,7 @@
     <string name="content_description">contentDescription</string>
 
     <string name="simple_error_mesg">Oops!\nSomthing Wrong Happened.</string>
-    <string name="lang">en_US</string>
+    <string name="default_image_size">w500</string>
 
     <string name="released">Released</string>
     <string name="countries">Countries</string>

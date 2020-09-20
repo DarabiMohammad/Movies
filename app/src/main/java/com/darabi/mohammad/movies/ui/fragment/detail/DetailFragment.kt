@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import com.bumptech.glide.RequestManager
 import com.darabi.mohammad.movies.R
 import com.darabi.mohammad.movies.remote.api.model.MovieDetail
@@ -13,7 +12,6 @@ import com.darabi.mohammad.movies.remote.api.model.Name
 import com.darabi.mohammad.movies.repository.Status
 import com.darabi.mohammad.movies.ui.fragment.BaseFragment
 import com.darabi.mohammad.movies.util.extractIntegers
-import com.darabi.mohammad.movies.util.makeToast
 import kotlinx.android.synthetic.main.fragment_detail.*
 import javax.inject.Inject
 
@@ -29,7 +27,7 @@ class DetailFragment @Inject constructor(
 
         viewModel.fetchMovieDetail()
 
-        viewModel.movieDetailResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.movieDetailResponse.observe(viewLifecycleOwner, {
             when(it.status) {
                 Status.LOADING -> onLoading()
                 Status.SUCCESS -> onSuccess(it.data!!)
@@ -60,9 +58,9 @@ class DetailFragment @Inject constructor(
 
         checkAndAssign(txt_languege, movieDetail.spokenLanguages)
 
-        txt_budget.text = "${getString(R.string.budget)} : ${movieDetail.budget.toString()}"
+        txt_budget.text = "${getString(R.string.budget)} : ${movieDetail.budget}"
 
-        handler.postDelayed(Runnable {
+        handler.postDelayed({
             prg_loading.visibility = View.GONE
             scroll_view.visibility = View.VISIBLE
         }, 30)
@@ -81,7 +79,9 @@ class DetailFragment @Inject constructor(
         val timeInMin = time.extractIntegers().toInt()
         val hour = timeInMin / 60
         val minute = timeInMin % 60
-        return "${hour}h ${minute}min"
+        val h = if(hour > 0) "${hour}h " else ""
+        val m = if(minute > 0) "${minute}min" else ""
+        return "${h}${m}"
     }
 
     private fun onError(message: String?) {

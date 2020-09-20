@@ -15,7 +15,6 @@ import com.darabi.mohammad.movies.repository.Response.Companion.loading
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class MainViewModel @Inject constructor(
     application: Application,
@@ -26,10 +25,9 @@ class MainViewModel @Inject constructor(
     private val apiKey = BuildConfig.API_KEY
     private val currentYear by lazy { Calendar.getInstance().get(Calendar.YEAR) }
     private val defaultPage = 1
-    val doRefresh = "do_refresh"
 
     var movieId = -1
-    private var year = currentYear.toString()
+    var year = currentYear.toString()
 
     private fun saveConfigs() = viewModelScope.launch {
 
@@ -41,16 +39,20 @@ class MainViewModel @Inject constructor(
 
     private fun populateReleaseYears(): ArrayList<String> {
         val years = arrayListOf<String>()
-        for(i in 1882 until currentYear + 1) {
+        for(i in 1883 until currentYear + 1) {
             years.add(i.toString())
         }
         return years
     }
 
-    private fun getImageSizesList() = prefsManager.getPosterSizes()?.distinct()
+    private fun getImageSizesList() = prefsManager.getPosterSizes()?.distinct() ?: emptyList()
 
-    //hard coding
-    private fun getImageSize() = getImageSizesList()?.get(6)
+    private fun getImageSize(): String {
+        val imageSizes = getImageSizesList()
+        if(imageSizes.isNotEmpty())
+            return imageSizes[imageSizes.lastIndex]
+        return getApplication<App>().getString(R.string.default_image_size)
+    }
 
     fun checkConfigsStatus() {
         if(prefsManager.getBaseImageUrl().isEmpty())
@@ -69,9 +71,7 @@ class MainViewModel @Inject constructor(
             year = releasYear
         }
         moviesResponse.value = loading(message = loadingState)
-        moviesResponse.value = repository.fetchMovies(
-            apiKey, getApplication<App>().getString(R.string.lang), releasYear, page
-        )
+        moviesResponse.value = repository.fetchMovies(apiKey, releasYear, page)
     }
 
     val movieDetailResponse = MutableLiveData<Response<MovieDetail>>()

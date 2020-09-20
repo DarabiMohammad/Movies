@@ -20,7 +20,7 @@ data class Response <out T> (
         fun <T> error(data: T?, throwable: Throwable, message: String): Response<T> =
             Response(status = Status.ERROR, data = data, throwable = throwable, message = message)
 
-        fun <T> loading(data: T? = null, message: String? = DO_NOTHING): Response<T> =
+        fun <T> loading(message: String? = DO_NOTHING): Response<T> =
             Response(status = Status.LOADING, data = null, message = message)
     }
 }

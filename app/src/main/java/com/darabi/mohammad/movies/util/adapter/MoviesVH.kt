@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
-import com.bumptech.glide.RequestManager
 import com.darabi.mohammad.movies.R
 import com.darabi.mohammad.movies.remote.api.model.Movie
 
